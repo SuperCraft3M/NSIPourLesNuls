@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+@layer base {
+  body {
+    @apply bg-gradient-to-br from-indigo-50 to-purple-50;
+  }
+}
+
+.glass-card {
+  @apply bg-white/80 backdrop-blur-lg;
+}
+
+.hover-card {
+  @apply transform transition-all duration-300 hover:scale-105 hover:shadow-xl;
+}
