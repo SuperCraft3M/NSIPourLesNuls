@@ -1,4 +1,3 @@
-import React from 'react';
 import { Code2, Database, Lightbulb, Rocket, Brain, Trophy } from 'lucide-react';
 import { CategoryCard } from '../components/home/CategoryCard';
 

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { BookOpen } from 'lucide-react';
 
@@ -23,11 +22,10 @@ export function Header() {
               <li key={path}>
                 <Link
                   to={path}
-                  className={`px-3 py-2 rounded-md transition-colors ${
-                    location.pathname === path
+                  className={`px-3 py-2 rounded-md transition-colors ${location.pathname === path
                       ? 'bg-white/20 text-white'
                       : 'hover:bg-white/10 text-white/80 hover:text-white'
-                  }`}
+                    }`}
                 >
                   {label}
                 </Link>

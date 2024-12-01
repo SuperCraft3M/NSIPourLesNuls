@@ -1,12 +1,13 @@
-import React from 'react';
 import { useParams } from 'react-router-dom';
 import { SubCategoryCard } from '../components/course/SubCategoryCard';
 import { pythonCourse } from '../data/courses/python';
 import { sqlCourse } from '../data/courses/sql';
+import { templateCourse } from '../data/courses/template';
 
 const courses = {
   python: pythonCourse,
   sql: sqlCourse,
+  template: templateCourse,
 };
 
 export function CategoryPage() {
