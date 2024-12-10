@@ -9,6 +9,6 @@ export default defineConfig({
   },
   publicDir: 'public',
   build: {
-    outDir: 'www',
+    outDir: 'build',
   }
 });
