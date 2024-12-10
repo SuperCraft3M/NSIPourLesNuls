@@ -40,7 +40,7 @@ Il existe plusieurs types de variables que tu vas devoir apprendre. Heureusement
 
 Voici une vue d’ensemble des types de données essentiels en Python :
 
-![Tableau des variables](${'/imgs/variables.png'})
+![Tableau des variables](${'/imgs/python/variables.png'})
 
 > **Astuce :** Les noms des types sont toujours en anglais, mais leur fonctionnement est très intuitif.
 

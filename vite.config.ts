@@ -8,4 +8,7 @@ export default defineConfig({
     exclude: ['lucide-react'],
   },
   publicDir: 'public',
+  build: {
+    outDir: 'www',
+  }
 });
