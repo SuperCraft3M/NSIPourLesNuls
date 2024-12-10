@@ -74,7 +74,7 @@ est_etudiant = True
 liste_matiere = ["maths", "français", "anglais"]
 dico_notes = {"maths": 12, "français": 15, "anglais": 17}`,
             explanations: {
-              'age = 17': "Une variable de type entier (int), ici 12 est la valeur de la variable.",
+              'age = 17': "Une variable de type entier (int), ici 17 est la valeur de la variable.",
               'nom = "Alice"': "Une variable de type chaîne de caractères (str), ici 'Alice' est la valeur de la variable.",
               'moyenne = 15.5': "Une variable de type nombre décimal (float), ici 15.5 est la valeur de la variable.",
               'est_etudiant = True': "Une variable de type booléen (bool), ici True (vrai) est la valeur de la variable.",
