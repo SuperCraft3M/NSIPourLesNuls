@@ -1,4 +1,5 @@
 import { LucideIcon } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface CategoryCardProps {
   title: string;
@@ -9,8 +10,8 @@ interface CategoryCardProps {
 
 export function CategoryCard({ title, description, icon: Icon, href }: CategoryCardProps) {
   return (
-    <a
-      href={href}
+    <Link
+      to={href}
       className="block p-8 glass-card rounded-xl hover-card"
     >
       <div className="flex flex-col items-start space-y-4">
@@ -22,6 +23,6 @@ export function CategoryCard({ title, description, icon: Icon, href }: CategoryC
           <p className="text-gray-600 leading-relaxed">{description}</p>
         </div>
       </div>
-    </a>
+    </Link>
   );
 }
