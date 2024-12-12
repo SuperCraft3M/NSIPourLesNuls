@@ -6,6 +6,7 @@ export interface CodeExample {
 export interface Button {
   text: string;
   link: string;
+  download?: boolean;
   variant?: 'primary' | 'secondary' | 'outline';
   icon?: string;
 }

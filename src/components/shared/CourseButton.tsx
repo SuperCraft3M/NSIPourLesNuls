@@ -20,7 +20,10 @@ export function CourseButton({ button }: CourseButtonProps) {
     const buttonClass = `${baseStyles} ${variants[button.variant || 'primary']}`;
 
     return (
-        <Link to={button.link} className={buttonClass}>
+        button.download ? <a href={button.link} className={buttonClass} download>
+            {Icon && <Icon className="w-5 h-5 mr-2" />}
+            {button.text}
+        </a> : <Link to={button.link} className={buttonClass}>
             {Icon && <Icon className="w-5 h-5 mr-2" />}
             {button.text}
         </Link>

@@ -17,6 +17,7 @@ export const templateCourse: Category = {
           buttons: [{
             text: "Voir l'exemple",
             link: "/exemple",
+            download: false,
             variant: "primary",
             icon: "ExternalLink"
           }]

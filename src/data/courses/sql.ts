@@ -166,6 +166,130 @@ USE maBase;`,
 ## 🎉 **Félicitations !**
 Tu sais maintenant discuter avec MariaDB comme un pro. Prêt à coder, supprimer et créer des bases à gogo ? Let's gooo 🚀 !`},
       ]
+    },
+    {
+      id: 'create-table',
+      title: 'Créer une table',
+      description: 'Créer une table dans une base de données.',
+      content: [
+        {
+          type: 'text',
+          content: `
+# 🛠️ **Créer une table dans MariaDB : Le guide ultime (avec style)** 🎉  
+
+Bon, t’as une base de données ? Super, mais elle est vide. C’est comme un burger sans steak : inutile. 🍔 Maintenant, on va apprendre à **créer une table** et à la personnaliser avec classe.  
+
+---
+
+### **🛑 La commande magique : \`CREATE TABLE\`**  
+
+Voici la formule de base pour créer une table :`},
+        {
+          type: 'code',
+          content: '',
+          codeExample: {
+            code: `# Exemple de structuration non fonctionnel
+CREATE TABLE nom_de_la_table (
+  colonne1 TYPE_DE_DONNÉE CONSTRAINTS,
+  colonne2 TYPE_DE_DONNÉE CONSTRAINTS,
+  ...
+) ENGINE=InnoDB;`,
+            explanations: {}
+          }
+        },
+        {
+          type: 'text',
+          content: `
+#### **💡 Décryptage des éléments :**  
+- **\`nom_de_la_table\`** : Le nom que tu donnes à ta table. C’est comme son prénom, choisis un truc clair. 😎  
+- **\`colonne1\` et \`colonne2\`** : Les noms des colonnes, alias les catégories de données que tu veux stocker.  
+- **\`TYPE_DE_DONNÉE\`** : Le type d’info que la colonne va contenir (texte, nombres, dates…).  
+- **\`CONSTRAINTS\`** : Les règles pour chaque colonne (ex. "doit toujours avoir une valeur").  
+- **\`ENGINE = InnoDB\`** : Le moteur utilisé pour gérer ta table. *InnoDB* est le choix par défaut (et le meilleur 💪).  
+
+---
+
+### **📝 Exemple simple : Créer une table d’utilisateurs**
+`},
+        {
+          type: 'code',
+          content: '',
+          codeExample: {
+            code: `# Requête pour créer une table d'utilisateurs
+CREATE TABLE utilisateurs (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nom VARCHAR(50) NOT NULL,
+  email VARCHAR(100) UNIQUE,
+  date_inscription DATE
+) ENGINE=InnoDB;`,
+            explanations: {
+              'CREATE TABLE utilisateurs (': "Crée une table nommée 'utilisateurs' 🎉",
+              'id INT AUTO_INCREMENT PRIMARY KEY,': "Crée une colonne 'id' qui s'incrémente automatiquement et est la clé primaire 🔑",
+              'nom VARCHAR(50) NOT NULL,': "Crée une colonne 'nom' de type texte (50 caractères max) qui ne peut pas être vide ❌",
+              'email VARCHAR(100) UNIQUE,': "Crée une colonne 'email' de type texte (100 caractères max) qui doit être unique 🌟",
+              'date_inscription DATE': "Crée une colonne 'date_inscription' de type date 📅",
+              ') ENGINE=InnoDB;': "Utilise le moteur InnoDB pour gérer la table 🚀"
+            }
+          }
+        },
+        {
+          type: 'text',
+          content: `
+
+#### **🚀 Explications détaillées ligne par ligne :**  
+- \`id INT AUTO_INCREMENT PRIMARY KEY\` :  
+  - **\`INT\`** : La colonne contient des nombres entiers.  
+  - **\`AUTO_INCREMENT\`** : L’id s’incrémente tout seul (1, 2, 3...), ce qu'il veut dire qu'il augmente de 1 automatiquement à chaque nouveau utilisateur.  
+  - **\`PRIMARY KEY\`** : C’est la clé primaire de la table, chaque utilisateur aura un ID différent. 🆔  
+
+- \`nom VARCHAR(50) NOT NULL\` :  
+  - **\`VARCHAR(50)\`** : Texte jusqu’à 50 caractères (prénoms, noms, etc.).  
+  - **\`NOT NULL\`** : Impossible de laisser cette case vide. Pas de nom = pas de compte. 🙅  
+
+- \`email VARCHAR(100) UNIQUE\` :  
+  - **\`VARCHAR(100)\`** : Texte jusqu’à 100 caractères (emails).  
+  - **\`UNIQUE\`** : Chaque email doit être unique. Pas de doublon, pas de spam. 📧  
+
+- \`date_inscription DATE\` :  
+  - **\`DATE\`** : Contient une date (ex. "2024-12-12").  
+
+- \`ENGINE = InnoDB\` :  
+  - Utilise **InnoDB** pour gérer la table avec des fonctionnalités avancées comme les *transactions* et les *clés étrangères*. Ne t'attarde pas trop là-dessus, met le juste à chaque fois. 😅  
+
+---
+
+### **🔥 Les types de données principaux :** (à connaitre)
+
+![Types de données principales](${'/imgs/sql/insert-parameters-types.png'})
+
+---
+
+### **🌟 Les contraintes utiles :** (à connaitre)
+
+![Contraintes utiles](${'/imgs/sql/insert-parameters-constraints.png'})
+
+---
+
+### **⚡ Ton tour : Essaye !**
+
+Crée une table avec les colonnes que tu veux ! Voici un TP à suivre :
+
+![TP Créer une table](${'/imgs/sql/create-table-tp.png'})
+
+🚀 Maintenant, à toi de jouer. C’est comme construire une maison... mais pour tes données 🏡 !
+`},
+        {
+          type: 'button',
+          content: '',
+          buttons: [{
+            text: "Correction",
+            link: "/resources/exercice-create-table.png",
+            download: true,
+            variant: "primary",
+            icon: "Download"
+          }]
+        }
+      ]
     }
   ]
 };
