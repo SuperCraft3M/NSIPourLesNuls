@@ -1,0 +1,118 @@
+Ah, tu as raison ! 😅 Les **clés primaires** et les **foreign keys** sont super importantes pour organiser et relier les tables entre elles, un peu comme des ponts entre différentes îles 🏝️. Voici une version mise à jour qui inclut tout ça :  
+
+---
+
+### 🛠️ **Créer une table avec des clés primaires et des foreign keys**  
+
+Les clés primaires et les clés étrangères (foreign keys) sont la base des bases en bases de données (tu l'as ? 😏). Elles permettent de structurer les tables et de créer des liens entre elles.  
+
+---
+
+#### **🔑 Qu’est-ce qu’une clé primaire (Primary Key) ?**  
+Une **clé primaire** identifie chaque ligne de manière unique dans une table. C’est comme ton numéro d’identité : personne d’autre n’a le même.  
+
+Exemple :  
+```sql
+id INT AUTO_INCREMENT PRIMARY KEY
+```  
+
+---
+
+#### **🌐 Qu’est-ce qu’une clé étrangère (Foreign Key) ?**  
+Une **clé étrangère** est un lien entre deux tables. Elle fait référence à une clé primaire dans une autre table, un peu comme une adresse qui pointe vers une maison. 🏡  
+
+Exemple :  
+```sql
+FOREIGN KEY (id_utilisateur) REFERENCES utilisateurs(id)
+```  
+
+---
+
+### **Exemple complet : Créer deux tables avec des liens**  
+
+Imaginons que tu veux créer une table `utilisateurs` et une table `commandes` (parce que nos utilisateurs aiment commander des pizzas 🍕).  
+
+```sql
+-- Table des utilisateurs
+CREATE TABLE utilisateurs (
+  id INT AUTO_INCREMENT PRIMARY KEY, -- Clé primaire
+  nom VARCHAR(50) NOT NULL,
+  email VARCHAR(100) UNIQUE NOT NULL
+) ENGINE=InnoDB;
+
+-- Table des commandes
+CREATE TABLE commandes (
+  id INT AUTO_INCREMENT PRIMARY KEY, -- Clé primaire
+  id_utilisateur INT, -- Clé étrangère
+  produit VARCHAR(50) NOT NULL,
+  date_commande DATE NOT NULL,
+  FOREIGN KEY (id_utilisateur) REFERENCES utilisateurs(id) ON DELETE CASCADE
+) ENGINE=InnoDB;
+```  
+
+---
+
+### **🚀 Explications :**  
+
+#### **🔍 Dans la table `utilisateurs` :**  
+- **`id INT AUTO_INCREMENT PRIMARY KEY`** : Chaque utilisateur a un identifiant unique (clé primaire).  
+- **`nom VARCHAR(50) NOT NULL`** : Le nom de l’utilisateur, obligatoire (pas de champ vide).  
+- **`email VARCHAR(100) UNIQUE NOT NULL`** : Chaque email doit être unique et rempli.  
+
+#### **🔍 Dans la table `commandes` :**  
+- **`id INT AUTO_INCREMENT PRIMARY KEY`** : Chaque commande a un ID unique.  
+- **`id_utilisateur INT`** : Cette colonne stocke l’ID d’un utilisateur (lien avec `utilisateurs`).  
+- **`FOREIGN KEY (id_utilisateur)`** :  
+  - Indique que `id_utilisateur` correspond à la clé primaire `id` dans `utilisateurs`.  
+  - **`ON DELETE CASCADE`** : Si un utilisateur est supprimé, toutes ses commandes le sont aussi automatiquement (pratique 💥).  
+
+---
+
+### **Les règles des clés étrangères :**  
+
+- **`REFERENCES table(colonne)`** : Fait le lien entre une clé étrangère et une clé primaire dans une autre table.  
+- **`ON DELETE CASCADE`** : Supprime automatiquement les lignes liées quand la ligne principale est supprimée.  
+- **`ON UPDATE CASCADE`** : Si la clé primaire change, la clé étrangère est mise à jour.  
+
+---
+
+### **👨‍💻 Autre exemple avec un lien entre 3 tables :**  
+
+Tu veux gérer une base de données pour une école avec des tables `eleves`, `cours` et `inscriptions` :  
+
+```sql
+-- Table des élèves
+CREATE TABLE eleves (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nom VARCHAR(50) NOT NULL
+) ENGINE=InnoDB;
+
+-- Table des cours
+CREATE TABLE cours (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  titre VARCHAR(100) NOT NULL
+) ENGINE=InnoDB;
+
+-- Table des inscriptions (liens entre élèves et cours)
+CREATE TABLE inscriptions (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  id_eleve INT,
+  id_cours INT,
+  date_inscription DATE NOT NULL,
+  FOREIGN KEY (id_eleve) REFERENCES eleves(id) ON DELETE CASCADE,
+  FOREIGN KEY (id_cours) REFERENCES cours(id) ON DELETE CASCADE
+) ENGINE=InnoDB;
+```  
+
+---
+
+### **🎉 Récapitulatif des avantages :**  
+
+- Les **clés primaires** garantissent que chaque ligne est unique (pas de doublons).  
+- Les **clés étrangères** connectent tes tables et permettent de garder les données cohérentes.  
+- Les options comme **ON DELETE CASCADE** ou **ON UPDATE CASCADE** facilitent la gestion des relations.  
+
+---
+
+### **🌟 À toi de jouer !**  
+Essaie de créer tes propres tables avec des clés primaires et des foreign keys. C’est comme construire un réseau social, mais avec des tables et pas des amis ! 💻😄  
