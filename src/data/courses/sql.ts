@@ -268,16 +268,205 @@ CREATE TABLE utilisateurs (
 
 ![Contraintes utiles](${'/imgs/sql/insert-parameters-constraints.png'})
 
+🚀 Maintenant, à toi de jouer. C’est comme construire une maison... mais pour tes données 🏡 !
+`}
+      ]
+    },
+    {
+      id: 'create-table-keys',
+      title: 'Clefs Primaires et Secondaires',
+      description: 'A quoi servent les clefs primaires et secondaires ?',
+      content: [
+        {
+          type: 'text',
+          content: `
+# 🛠️ **Créer une table avec des clés primaires et des clés étrangères (foreign keys)**  
+
+Les clés primaires et les clés étrangères (foreign keys) sont la base des bases en bases de données (tu l'as ? 😏). Elles permettent de structurer les tables et de créer des liens entre elles.  
+
 ---
 
-### **⚡ Ton tour : Essaye !**
+### **🔑 Qu’est-ce qu’une clé primaire (Primary Key) ?**  
+Une **clé primaire** identifie chaque ligne de manière unique dans une table. C’est comme ton numéro d’identité : personne d’autre n’a le même.  
+`},
+        {
+          type: 'code',
+          content: '',
+          codeExample: {
+            code: `-- Ajout d'une clé primaire dans la requête.
+id INT AUTO_INCREMENT PRIMARY KEY
+# OU (oui il a 2 méthodes)
+PRIMARY KEY (id)`,
+            explanations: {
+              'id INT AUTO_INCREMENT PRIMARY KEY': "Ici, on défini l'attribu 'id' comme PRIMARY KEY 🔑 donc en élément unique !",
+              'PRIMARY KEY (id)': "On défini l'attribu 'id' comme PRIMARY KEY 🔑, mais cette fois-ci à la fin de la requête."
+            }
+          }
+        },
+        {
+          type: 'text',
+          content: `
+---
 
-Crée une table avec les colonnes que tu veux ! Voici un TP à suivre :
+### **🌐 Qu’est-ce qu’une clé étrangère (Foreign Key) ?**  
+Une **clé étrangère** est un lien entre deux tables. Elle fait référence à une clé primaire dans une autre table, un peu comme une adresse qui pointe vers une maison. 🏡  
+`},
+        {
+          type: 'code',
+          content: '',
+          codeExample: {
+            code: `-- On ajoute des clés étrangères
+FOREIGN KEY (id_utilisateur) REFERENCES utilisateurs(id),
+FOREIGN KEY (id_véhicule) REFERENCES véhicules(id)`,
+            explanations: {
+              'FOREIGN KEY (id_utilisateur) REFERENCES utilisateurs(id),': "On ajoute une clé étrangère nomée 'id_utilisateur' dans cette table. Et on ajoute sa référence qui est 'id' dans la table 'utilisateurs'",
+              'FOREIGN KEY (id_véhicule) REFERENCES véhicules(id)': "Ici, on fait la même chose mais avec les IDs de véhicules."
+            }
+          }
+        },
+        {
+          type: 'text',
+          content: `
+Parfait 😊, maintenant regardons comment utiliser les clés primaires et étrangères dans des cas concrets.
+
+---
+
+## **Exemple complet : Créer deux tables avec des liens**  
+
+Imaginons que tu veux créer une table \`utilisateurs\` et une table \`commandes\` (parce que nos utilisateurs aiment commander des pizzas 🍕).
+`},
+{
+  type: 'code',
+  content: '',
+  codeExample: {
+    code: `-- Table des utilisateurs
+CREATE TABLE utilisateurs (
+  id INT AUTO_INCREMENT, -- Clé primaire
+  nom VARCHAR(50) NOT NULL,
+  email VARCHAR(100) UNIQUE NOT NULL,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB;
+
+-- Table des commandes
+CREATE TABLE commandes (
+  id INT AUTO_INCREMENT, -- Clé primaire
+  id_utilisateur INT, -- Clé étrangère
+  produit VARCHAR(50) NOT NULL,
+  date_commande DATE NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (id_utilisateur) REFERENCES utilisateurs(id)
+) ENGINE=InnoDB;`,
+    explanations: {
+      'id INT AUTO_INCREMENT, -- Clé primaire': "On crée un élément pour notre base de donné et nous le marquons comme clé primaire SANS l'avoir encore défini (c'est juste pour se rappeler 😁)",
+      'PRIMARY KEY (id)': "Ici, on défini enfin l'élément 'id' comme PRIMARY KEY",
+      'id_utilisateur INT, -- Clé étrangère': "On crée un élément pour notre base de donné et nous le marquons comme clé étrangère SANS l'avoir encore défini (c'est juste pour se rappeler 😁)",
+      'FOREIGN KEY (id_utilisateur) REFERENCES utilisateurs(id)': "Ici, on défini la clé étrangère 'id_utilisateur' et on le relis à l'élément 'id' de la table 'utilisateurs'."
+    }
+  }
+},
+{
+  type: 'text',
+  content: `
+---
+
+### **🚀 Explications complètes :**  
+
+#### **🔍 Dans la table \`utilisateurs\` :**  
+- **\`id INT AUTO_INCREMENT PRIMARY KEY\`** : Chaque utilisateur a un identifiant unique (clé primaire).  
+- **\`nom VARCHAR(50) NOT NULL\`** : Le nom de l’utilisateur, obligatoire (pas de champ vide).  
+- **\`email VARCHAR(100) UNIQUE NOT NULL\`** : Chaque email doit être unique et rempli.
+- **\`PRIMARY KEY (id)\`** :  
+  - Indique que \`id\` correspond à la clé primaire  de cette table (table : \`utilisateurs\`).  
+
+#### **🔍 Dans la table \`commandes\` :**  
+- **\`id INT AUTO_INCREMENT PRIMARY KEY\`** : Chaque commande a un ID unique.  
+- **\`id_utilisateur INT\`** : Cette colonne stocke l’ID d’un utilisateur (lien avec \`utilisateurs\`).  
+- **\`FOREIGN KEY (id_utilisateur) REFERENCES utilisateur(id)\`** :  
+  - Indique que \`id_utilisateur\` correspond à la clé primaire \`id\` dans \`utilisateurs\`.  
+
+---
+
+### **Les règles des clés étrangères :**  
+
+- **\`REFERENCES table(colonne)\`** : Fait le lien entre une clé étrangère et une clé primaire dans une autre table.
+
+__Pas obligatoire à connaître, mais elles peuvent être utiles.__
+- **\`ON DELETE CASCADE\`** : Supprime automatiquement les lignes liées quand la ligne principale est supprimée.  
+- **\`ON UPDATE CASCADE\`** : Si la clé primaire change, la clé étrangère est mise à jour.  
+
+---
+
+### **👨‍💻 Autre exemple avec un lien entre 3 tables :**
+
+**⚠️ Nous allons utiliser les différentes méthodes vus, afin d'avoir tous les exemples possibles. Tout n'est pas à connaître par coeur, à toi de faire le tri ! ⚠️**
+
+Tu veux gérer une base de données pour une école avec des tables \`eleves\`, \`cours\` et \`inscriptions\` :
+`},
+{
+  type: 'code',
+  content: '',
+  codeExample: {
+    code: `-- Table des élèves
+CREATE TABLE eleves (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nom VARCHAR(50) NOT NULL
+) ENGINE=InnoDB;
+
+-- Table des cours
+CREATE TABLE cours (
+  id INT AUTO_INCREMENT,
+  titre VARCHAR(100) NOT NULL,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB;
+
+-- Table des inscriptions (liens entre élèves et cours)
+CREATE TABLE inscriptions (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  id_eleve INT,
+  id_cours INT,
+  date_inscription DATE NOT NULL,
+  FOREIGN KEY (id_eleve) REFERENCES eleves(id) ON DELETE CASCADE,
+  FOREIGN KEY (id_cours) REFERENCES cours(id) ON DELETE CASCADE
+) ENGINE=InnoDB;`,
+    explanations: {}
+  }
+},
+{
+  type: 'text',
+  content: `
+---
+
+### **🎉 Récapitulatif des avantages :**  
+
+- Les **clés primaires** garantissent que chaque ligne est unique (pas de doublons).  
+- Les **clés étrangères** connectent tes tables et permettent de garder les données cohérentes.  
+- Les options comme **ON DELETE CASCADE** ou **ON UPDATE CASCADE** facilitent la gestion des relations.  
+
+---
+
+### **🌟 À toi de jouer !**  
+Essaie de créer tes propres tables avec des clés primaires et des foreign keys. C’est comme construire un réseau social, mais avec des tables et pas des amis ! 💻😄  
+  `}
+      ]
+    },
+    {
+      id: 'create-table-exercice',
+      title: 'Exercice : Créer une table',
+      description: 'Exercice de validation des connaissances.',
+      content: [
+{
+  type: 'text',
+  content: `
+# **⚡ Ton tour : Essaye !**
+
+*Afin de pouvoir faire cet exercice, tu dois absolulent avoir suivit tous les cours précédents.*
+
+Tu vas devoir créer une base de donnée nommée \`autoschool\`. Voici toutes les informations concernant la base à construire :
 
 ![TP Créer une table](${'/imgs/sql/create-table-tp.png'})
 
-🚀 Maintenant, à toi de jouer. C’est comme construire une maison... mais pour tes données 🏡 !
-`},
+En espérant que ça n'est pas été trop dur 😉.
+  `},
         {
           type: 'button',
           content: '',
@@ -290,6 +479,6 @@ Crée une table avec les colonnes que tu veux ! Voici un TP à suivre :
           }]
         }
       ]
-    }
+    },
   ]
 };
