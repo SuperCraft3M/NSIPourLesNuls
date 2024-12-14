@@ -274,7 +274,7 @@ CREATE TABLE utilisateurs (
     },
     {
       id: 'create-table-keys',
-      title: 'Clefs Primaires et Secondaires',
+      title: 'Clés Primaires et Secondaires',
       description: 'A quoi servent les clefs primaires et secondaires ?',
       content: [
         {
@@ -335,11 +335,11 @@ Parfait 😊, maintenant regardons comment utiliser les clés primaires et étra
 
 Imaginons que tu veux créer une table \`utilisateurs\` et une table \`commandes\` (parce que nos utilisateurs aiment commander des pizzas 🍕).
 `},
-{
-  type: 'code',
-  content: '',
-  codeExample: {
-    code: `-- Table des utilisateurs
+        {
+          type: 'code',
+          content: '',
+          codeExample: {
+            code: `-- Table des utilisateurs
 CREATE TABLE utilisateurs (
   id INT AUTO_INCREMENT, -- Clé primaire
   nom VARCHAR(50) NOT NULL,
@@ -356,17 +356,17 @@ CREATE TABLE commandes (
   PRIMARY KEY (id),
   FOREIGN KEY (id_utilisateur) REFERENCES utilisateurs(id)
 ) ENGINE=InnoDB;`,
-    explanations: {
-      'id INT AUTO_INCREMENT, -- Clé primaire': "On crée un élément pour notre base de donné et nous le marquons comme clé primaire SANS l'avoir encore défini (c'est juste pour se rappeler 😁)",
-      'PRIMARY KEY (id)': "Ici, on défini enfin l'élément 'id' comme PRIMARY KEY",
-      'id_utilisateur INT, -- Clé étrangère': "On crée un élément pour notre base de donné et nous le marquons comme clé étrangère SANS l'avoir encore défini (c'est juste pour se rappeler 😁)",
-      'FOREIGN KEY (id_utilisateur) REFERENCES utilisateurs(id)': "Ici, on défini la clé étrangère 'id_utilisateur' et on le relis à l'élément 'id' de la table 'utilisateurs'."
-    }
-  }
-},
-{
-  type: 'text',
-  content: `
+            explanations: {
+              'id INT AUTO_INCREMENT, -- Clé primaire': "On crée un élément pour notre base de donné et nous le marquons comme clé primaire SANS l'avoir encore défini (c'est juste pour se rappeler 😁)",
+              'PRIMARY KEY (id)': "Ici, on défini enfin l'élément 'id' comme PRIMARY KEY",
+              'id_utilisateur INT, -- Clé étrangère': "On crée un élément pour notre base de donné et nous le marquons comme clé étrangère SANS l'avoir encore défini (c'est juste pour se rappeler 😁)",
+              'FOREIGN KEY (id_utilisateur) REFERENCES utilisateurs(id)': "Ici, on défini la clé étrangère 'id_utilisateur' et on le relis à l'élément 'id' de la table 'utilisateurs'."
+            }
+          }
+        },
+        {
+          type: 'text',
+          content: `
 ---
 
 ### **🚀 Explications complètes :**  
@@ -402,11 +402,11 @@ __Pas obligatoire à connaître, mais elles peuvent être utiles.__
 
 Tu veux gérer une base de données pour une école avec des tables \`eleves\`, \`cours\` et \`inscriptions\` :
 `},
-{
-  type: 'code',
-  content: '',
-  codeExample: {
-    code: `-- Table des élèves
+        {
+          type: 'code',
+          content: '',
+          codeExample: {
+            code: `-- Table des élèves
 CREATE TABLE eleves (
   id INT AUTO_INCREMENT PRIMARY KEY,
   nom VARCHAR(50) NOT NULL
@@ -428,12 +428,12 @@ CREATE TABLE inscriptions (
   FOREIGN KEY (id_eleve) REFERENCES eleves(id) ON DELETE CASCADE,
   FOREIGN KEY (id_cours) REFERENCES cours(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;`,
-    explanations: {}
-  }
-},
-{
-  type: 'text',
-  content: `
+            explanations: {}
+          }
+        },
+        {
+          type: 'text',
+          content: `
 ---
 
 ### **🎉 Récapitulatif des avantages :**  
@@ -454,9 +454,9 @@ Essaie de créer tes propres tables avec des clés primaires et des foreign keys
       title: 'Exercice : Créer une table',
       description: 'Exercice de validation des connaissances.',
       content: [
-{
-  type: 'text',
-  content: `
+        {
+          type: 'text',
+          content: `
 # **⚡ Ton tour : Essaye !**
 
 *Afin de pouvoir faire cet exercice, tu dois absolulent avoir suivit tous les cours précédents.*
@@ -480,5 +480,197 @@ En espérant que ça n'est pas été trop dur 😉.
         }
       ]
     },
+    {
+      id: 'insert-data',
+      title: 'Insérer des données dans une table',
+      description: 'Apprends à insérer des données dans tes tables avec la commande INSERT INTO.',
+      content: [
+        {
+          type: 'text',
+          content: `
+# 🍔 **Insérer des données dans une table : Le menu spécial INSERT INTO** 🎉
+
+Maintenant que tu sais créer des tables, il est temps de les remplir ! Une table vide, c’est triste, non ? 😢 Imagine un resto sans clients ou une playlist sans chansons. Avec la commande **INSERT INTO**, tu vas pouvoir **ajouter des données** dans tes tables comme un chef 👩‍🍳.
+
+---
+
+## **🔑 La commande magique : \`INSERT INTO\`**
+
+Voici la formule de base pour insérer des données dans une table :
+`},
+        {
+          type: 'code',
+          content: '',
+          codeExample: {
+            code: `INSERT INTO nom_de_la_table (colonne1, colonne2, ...)
+VALUES (valeur1, valeur2, ...);`,
+            explanations: {
+              'INSERT INTO nom_de_la_table (colonne1, colonne2, ...)': "Indique dans quelle table et quelles colonnes tu veux insérer des données.",
+              'VALUES (valeur1, valeur2, ...);': "Les valeurs correspondantes à insérer dans les colonnes."
+            }
+          }
+        },
+        {
+          type: 'text',
+          content: `
+### **🧩 Décryptage des éléments :**
+- **\`nom_de_la_table\`** : Le nom de la table où tu veux ajouter des données.
+- **\`colonne1, colonne2, ...\`** : Les colonnes dans lesquelles tu veux insérer des valeurs.
+- **\`valeur1, valeur2, ...\`** : Les valeurs correspondantes que tu veux ajouter.
+
+---
+
+## **📝 Exemple simple : Insérer des utilisateurs**
+
+Prenons une table \`utilisateurs\` comme exemple, que nous créons comme ceci :
+`},
+        {
+          type: 'code',
+          content: '',
+          codeExample: {
+            code: `CREATE TABLE utilisateurs (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nom VARCHAR(50) NOT NULL,
+  email VARCHAR(100) UNIQUE NOT NULL,
+  age INT
+) ENGINE=InnoDB;`,
+            explanations: {}
+          }
+        },
+        {
+          type: 'text',
+          content: `
+On veut insérer un utilisateur nommé **"Jean Dupont"** avec son email et son âge :
+`},
+        {
+          type: 'code',
+          content: '',
+          codeExample: {
+            code: `INSERT INTO utilisateurs (nom, email, age)
+VALUES ('Jean Dupont', 'jean.dupont@example.com', 30);`,
+            explanations: {
+              'INSERT INTO utilisateurs (nom, email, age)': "Indique que tu veux ajouter un utilisateur avec son nom, email et âge.",
+              'VALUES (\'Jean Dupont\', \'jean.dupont@example.com\', 30);': "Les valeurs à insérer dans les colonnes correspondantes."
+            }
+          }
+        },
+        {
+          type: 'text',
+          content: `
+**👉 Résultat :** Une nouvelle ligne est ajoutée dans la table avec :
+- **nom** = "Jean Dupont"
+- **email** = "jean.dupont@example.com"
+- **age** = 30
+- **id** = Généré automatiquement grâce à \`AUTO_INCREMENT\`.
+
+---
+
+## **✨ Variantes de l’insertion**
+
+### **1️⃣ Insérer dans toutes les colonnes (ordre respecté)**
+
+Si tu veux remplir **toutes les colonnes** de la table, tu peux te passer de la liste des colonnes :
+`},
+        {
+          type: 'code',
+          content: '',
+          codeExample: {
+            code: `INSERT INTO utilisateurs
+VALUES (NULL, 'Alice', 'alice@example.com', 25);`,
+            explanations: {
+              'INSERT INTO utilisateurs': "Indique que tu veux ajouter un utilisateur dans la table 'utilisateurs'.",
+              'VALUES (NULL, \'Alice\', \'alice@example.com\', 25);': "Les valeurs à insérer dans l'ordre des colonnes de la table."
+            }
+          }
+        },
+        {
+          type: 'text',
+          content: `
+- **\`NULL\`** : Pour l’ID généré automatiquement.
+- Les autres valeurs suivent l’ordre des colonnes dans la table.
+
+### **2️⃣ Insérer plusieurs lignes d’un coup 🚀**
+
+Gagner du temps, c’est toujours une bonne idée ! Voici comment insérer plusieurs utilisateurs en une seule commande :
+`},
+        {
+          type: 'code',
+          content: '',
+          codeExample: {
+            code: `INSERT INTO utilisateurs (nom, email, age)
+VALUES
+  ('Paul Martin', 'paul.martin@example.com', 28),
+  ('Emma Leroy', 'emma.leroy@example.com', 22),
+  ('Lucas Morel', 'lucas.morel@example.com', 35);`,
+            explanations: {}
+          }
+        },
+        {
+          type: 'text',
+          content: `
+> 💡 **Astuce :** Cette méthode est super rapide et pratique quand tu as plein de données à ajouter !
+
+---
+
+## **⚡ Les erreurs courantes et comment les éviter**
+
+### **🚨 Erreur : "Duplicate entry for key 'email'"**
+- **Raison** : Tu essaies d’insérer une valeur dans une colonne avec la contrainte **UNIQUE**, mais cette valeur existe déjà.
+- **Solution** : Vérifie que l’email est unique avant d’insérer.
+
+### **🚨 Erreur : "Column count doesn’t match value count"**
+- **Raison** : Le nombre de colonnes ne correspond pas au nombre de valeurs fournies.
+- **Solution** : Vérifie que tu as bien listé toutes les colonnes nécessaires.
+
+---
+
+## **🎨 Exemple avancé : Table des commandes avec des foreign keys**
+
+Imaginons qu’on a une table \`commandes\` qui contient les commandes passées par les utilisateurs, construire de la manière suivante :
+`},
+        {
+          type: 'code',
+          content: '',
+          codeExample: {
+            code: `CREATE TABLE commandes (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  id_utilisateur INT,
+  produit VARCHAR(50) NOT NULL,
+  quantite INT DEFAULT 1,
+  date_commande DATE DEFAULT CURRENT_DATE,
+  FOREIGN KEY (id_utilisateur) REFERENCES utilisateurs(id)
+) ENGINE=InnoDB;`,
+            explanations: {}
+          }
+        },
+        {
+          type: 'text',
+          content: `
+### **Insérer une commande pour un utilisateur existant :**
+`},
+        {
+          type: 'code',
+          content: '',
+          codeExample: {
+            code: `INSERT INTO commandes (id_utilisateur, produit, quantite)
+VALUES (1, 'Pizza Margherita', 2);`,
+            explanations: {}
+          }
+        },
+        {
+          type: 'text',
+          content: `
+- **\`id_utilisateur = 1\`** : Fait référence à l’utilisateur avec l’ID 1 dans la table \`utilisateurs\`.
+- **\`produit = 'Pizza Margherita'\`** : L’article commandé.
+- **\`quantite = 2\`** : Deux pizzas, parce que pourquoi pas. 🍕
+
+---
+
+## **🎉 Félicitations !**
+
+Tu sais maintenant comment insérer des données dans tes tables comme un pro. Prêt à remplir tes tables avec des infos utiles et intéressantes ? Let’s gooo 🚀 !
+`},
+      ]
+    }
   ]
 };
