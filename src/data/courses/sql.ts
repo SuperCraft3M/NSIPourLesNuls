@@ -1303,7 +1303,11 @@ Tu n'as plus cas t'entrainer avec les exercices pour devenir un vrai pro ! 🚀
           content: `
 # **🎨 Exercice pratique: Joue avec \`SELECT\` !**
 
-## Tu vas devoir utiliser la commande \`SELECT\` pour extraire des données de la table \`utilisateurs\`. Voici les requêtes à réaliser :
+## Tu vas devoir utiliser la commande \`SELECT\` pour extraire des données de la table \`utilisateurs\`.
+
+Voici la structure de la base de données :
+
+![Structure de la base de données](${'/imgs/sql/exercice-schema-conceptuel.png'})
 
 ---
 
